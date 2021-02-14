@@ -71,8 +71,8 @@ const createSlider = () => {
   const prevNext = document.createElement('div');
   prevNext.className = "prev-next d-flex w-100 justify-content-between align-items-center";
   prevNext.innerHTML = ` 
-  <span class="prev" onclick="changeItem(-1)"><i class="fas fa-chevron-left"></i></span>
-  <span class="next" onclick="changeItem(1)"><i class="fas fa-chevron-right"></i></span>
+  <span id="prevBtn" class="prev" onclick="changeItem(-1)"><i class="fas fa-chevron-left"></i></span>
+  <span id="nextBtn" class="next" onclick="changeItem(1)"><i class="fas fa-chevron-right"></i></span>
   `;
 
   sliderContainer.appendChild(prevNext)
@@ -83,9 +83,9 @@ const createSlider = () => {
   // Solve the negative duration value
   let durationHandler = document.getElementById('duration').value;
   if (durationHandler<0){
-    durationHandler = 1000;
+    durationHandler = 1500;
   }
-  const duration = durationHandler || 1000;
+  const duration = durationHandler || 1500;
   // const duration = document.getElementById('duration').value || 1000;
   
   sliders.forEach(slide => {
@@ -157,10 +157,34 @@ inputEnter.addEventListener("keyup", function(event) {
   }
 });
 
+// prev next click on hover ArrowRight ArrowLeft
+
+const mainDiv = document.getElementById('mainDiv');
+mainDiv.addEventListener("mouseover", function(){
+
+  document.addEventListener('keydown', (event) => {
+    const keyName = event.key;
+    if(keyName === "ArrowRight"){
+      // console.log(keyName);
+      document.getElementById('prevBtn').click();
+
+    }
+    else if(keyName === "ArrowLeft"){
+      // console.log(keyName);
+      document.getElementById('nextBtn').click();
+
+    }
+    
+  })
+ 
+}) 
+
+// prev function
+
 // Toggle Spinner
 const toggleSpinner = () => {
   const spinner = document.getElementById('loading-Spinner');
-  console.log(spinner.classList);
+  
   
     spinner.classList.toggle('d-none');
   
